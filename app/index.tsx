@@ -6,6 +6,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import { router } from 'expo-router';
 
 const image = require('@/assets/images/backgroundimg.png'); 
 
@@ -31,7 +32,7 @@ export default function HomeScreen() {
         <View style={styles.button}>
 
           <Button
-            // onPress={}
+            onPress={() => router.push('./search')}
             title="Get Started"
             color="white"
           />
