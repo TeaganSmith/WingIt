@@ -1,22 +1,14 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet, SafeAreaView, ImageBackground, View, Image, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { useRouter } from 'expo-router';  // Hook to get route params
 
-type RootStackParamList = {
-  Details: { title: string; content: string };
-  // Add other routes here
-};
+const Details = () => {
+  const route = useRouter();  // This hook provides access to the params
+  const { title, content } = route.params;  // Destructure to get the params
 
-type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
 
-type Props = {
-  route: DetailsScreenRouteProp;
-};
-
-const Details: React.FC<Props> = ({ route }) => {
-  const { title, content } = route.params;
+  export default function Details(title : any) {
 
   return (
     <SafeAreaProvider>
@@ -33,8 +25,8 @@ const Details: React.FC<Props> = ({ route }) => {
           </View>
           <ScrollView contentContainerStyle={styles.detailsContainer}>
             <View style={styles.container}>
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.content}>{content}</Text>
+              {/* <Text style={styles.title}>{title}</Text> */}
+              {/* <Text style={styles.content}>{content}</Text> */}
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -75,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Details;
+// export default Details;

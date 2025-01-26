@@ -16,6 +16,7 @@ import airports from '../airports_formatted.js';
 import Autocomplete from 'react-native-autocomplete-input';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import styles from '../styles/explore.styles.js';
+import { router } from 'expo-router';
 
 const image = require('@/assets/images/backgroundimg.png');
 
@@ -163,7 +164,9 @@ export default function Search() {
               />
 
               {/* Search Button */}
-              <TouchableOpacity style={styles.searchButton}>
+              <TouchableOpacity style={styles.searchButton}
+                onPress={()=> router.push('./itinerary')}
+              >
                 <Text style={styles.searchButtonText}>Search</Text>
               </TouchableOpacity>
             </View>
