@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: 50, // Push the logo higher
+    marginLeft: 40, 
+    marginTop: 55, // Push the logo higher
   },
   logo: {
     width: 150,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
-    marginBottom: 40, // Add extra space below the airline picker
+    marginBottom: 30, // Add extra space below the airline picker
     width: width * 0.9,
   },
   selectedAirport: {
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   inputText: {
-    color: '#333',
+    color: '#000000',
     fontSize: 14,
   },
   textArea: {
@@ -139,11 +140,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   input: {
-    height: 40,
+    height: 20,
     borderColor: 'gray',
-    borderWidth: 1,
     paddingLeft: 8,
-    marginBottom: 10,
+    marginBottom: 5,
     borderRadius: 5,
   },
   image: {

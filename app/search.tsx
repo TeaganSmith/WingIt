@@ -103,8 +103,7 @@ export default function Search() {
               )}
             </View>
 
-            {/* Selected Airport */}
-            <Text style={styles.selectedAirport}>Selected Airport: {selectedAirport}</Text>
+            
 
             {/* Departure and Return Dates Row */}
             <View style={styles.row}>
