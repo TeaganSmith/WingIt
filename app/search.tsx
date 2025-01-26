@@ -27,6 +27,7 @@ export default function Search() {
   const [returnDate, setReturnDate] = useState<Date | null>(null); // For return date
   const [isDeparturePickerOpen, setDeparturePickerOpen] = useState(false);
   const [isReturnPickerOpen, setReturnPickerOpen] = useState(false);
+  const [description, setDescription] = useState(''); // For description input
 
   // Function to handle user input and filter the airports
   interface Airport {
@@ -150,10 +151,21 @@ export default function Search() {
                 </TouchableOpacity>
               </View>
 
+              {/* Form*/}
+              <View style={styles.container}>
+                <TextInput
+                style={styles.descriptionInput}
+                value={description}
+                onChangeText={(text) => setDescription(text)}
+                placeholder="Enter description"
+                multiline={true}
+              />
+
               {/* Search Button */}
               <TouchableOpacity style={styles.searchButton}>
                 <Text style={styles.searchButtonText}>Search</Text>
               </TouchableOpacity>
+            </View>
             </View>
           </ImageBackground>
         </SafeAreaView>

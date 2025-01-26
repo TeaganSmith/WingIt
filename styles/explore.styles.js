@@ -151,6 +151,20 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+
+  descriptionInput: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 10,
+    width: 350,
+    height: 300,
+    backgroundColor: '#fff',
+    textAlignVertical: 'top',
+    textAlign: 'left',
+  },
+
 });
 
 export default styles;
