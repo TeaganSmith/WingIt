@@ -27,10 +27,10 @@ export const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, content }
 const styles = StyleSheet.create({
   container: {
     height: 200,
-    backgroundColor: "white",
+    backgroundColor: 'rgba(13, 53, 68, 0.8)',
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'white',
     marginVertical: 8,
     marginHorizontal: 16,
     overflow: "hidden",
@@ -44,12 +44,14 @@ const styles = StyleSheet.create({
     fontSize: 17,
     padding: 10,
     fontWeight: "bold",
-    borderBottomColor: 'black',
+    borderBottomColor: 'white',
     borderBottomWidth: 1,
+    color: 'white',
   },
   content: {
     fontSize: 14,
     padding: 10,
+    color: 'white',
   },
 })
 
