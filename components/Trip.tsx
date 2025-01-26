@@ -1,57 +1,49 @@
-import type React from "react"
-import { useState } from "react"
-import { View, Text, TouchableOpacity, StyleSheet, LayoutAnimation, Platform, UIManager } from "react-native"
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-
-interface ExpandableInfoProps {
-  title: string
-  content: string
+export interface ExpandableInfoProps {
+  title: string;
+  content: string;
+  onPress?: () => void;
 }
 
-export const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, content }) => {
-
+export const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, content, onPress }) => {
   return (
-    <View style={styles.container}>
-        <TouchableOpacity
-            // onPress={}
-        >
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.content}>
-                {content}
-            </Text>
-        </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
+      <View style={styles.contentBox}>
+        <Text style={styles.content}>{content}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 200,
-    backgroundColor: 'rgba(13, 53, 68, 0.8)',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'white',
-    marginVertical: 8,
-    marginHorizontal: 16,
-    overflow: "hidden",
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    width: '90%',
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginVertical: 10,
   },
   title: {
-    fontSize: 17,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  contentBox: {
     padding: 10,
-    fontWeight: "bold",
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
-    color: 'white',
+    backgroundColor: '#f9f9f9',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#ddd',
   },
   content: {
     fontSize: 14,
-    padding: 10,
-    color: 'white',
+    color: '#555',
   },
-})
+});
 

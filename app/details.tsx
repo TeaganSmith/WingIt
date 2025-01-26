@@ -1,41 +1,78 @@
-import React from "react"
-import { ScrollView, StyleSheet, SafeAreaView, ImageBackground, View, Image } from "react-native"
-// import { DetailsList } from "../components/Trip"
-import { SafeAreaProvider } from "react-native-safe-area-context"
-import { DetailsList } from "@/components/DeatilsList"
-// import styles from "@/styles/explore.styles"
+import * as React from 'react';
+import { ScrollView, StyleSheet, SafeAreaView, ImageBackground, View, Image, Text } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function ExpandableInfoScreen() {
+type RootStackParamList = {
+  Details: { title: string; content: string };
+  // Add other routes here
+};
+
+type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
+
+type Props = {
+  route: DetailsScreenRouteProp;
+};
+
+const Details: React.FC<Props> = ({ route }) => {
+  const { title, content } = route.params;
+
   return (
     <SafeAreaProvider>
-        <ImageBackground
-          source={require('../assets/images/backgroundimg.png')}
-          style={{ flex: 1, width: '100%', height: '100%'}}
-        >
-        
+      <ImageBackground
+        source={require('../assets/images/backgroundimg.png')}
+        style={styles.background}
+      >
         <SafeAreaView>
-            <View style={{alignItems: 'center', alignContent: 'center'}}>
-                <Image
-                    style={styles.logo}
-                    source={require('@/assets/images/LOGO.png')}
-                />
+          <View style={styles.logoContainer}>
+            <Image
+              style={styles.logo}
+              source={require('@/assets/images/LOGO.png')}
+            />
+          </View>
+          <ScrollView contentContainerStyle={styles.detailsContainer}>
+            <View style={styles.container}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.content}>{content}</Text>
             </View>
-                <DetailsList
-                title="Trip to Texas"
-                content="React Native is an open-source mobile application development framework created by Facebook. It allows developers to use React along with native platform capabilities to build mobile applications for iOS and Android."
-                content2="React Native works by using JavaScript to control native components. It provides a bridge that allows JavaScript code to communicate with native modules, enabling developers to write code once and run it on multiple platforms."
-                content3="Some advantages of using React Native include: 1) Cross-platform development, 2) Faster development time, 3) Large community and ecosystem, 4) Native performance, 5) Hot reloading for quicker iterations, and 6) Ability to use native modules when needed."
-                />
-        </SafeAreaView>          
+          </ScrollView>
+        </SafeAreaView>
       </ImageBackground>
     </SafeAreaProvider>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    logo: {
-      height: 120,
-      width: 265,
-      marginLeft: 65
-    },
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  logo: {
+    height: 120,
+    width: 265,
+    marginLeft: 65,
+  },
+  detailsContainer: {
+    padding: 20,
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  content: {
+    fontSize: 16,
+    marginTop: 10,
+  },
 });
+
+export default Details;

@@ -32,18 +32,35 @@ export default function HomeScreen() {
         <View style={styles.button}>
 
           <Button
-            onPress={() => router.push('./search')}
+            onPress={() => router.push('./itinerary')}
             title="Get Started"
             color="white"
           />
         </View>
       </SafeAreaView>
       </ImageBackground>
+
     </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  stepContainer: {
+    gap: 8,
+    marginBottom: 8,
+  },
+  reactLogo: {
+    height: 178,
+    width: 290,
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+  },
   logo: {
     height: 120,
     width: 265,
