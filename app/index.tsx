@@ -32,7 +32,11 @@ export default function HomeScreen() {
         <View style={styles.button}>
 
           <Button
+<<<<<<< HEAD
             onPress={() => router.push('./search')}
+=======
+            onPress={() => router.push('./details')}
+>>>>>>> 093bebe7eb9ae7e7e7318433e0e89534bb9f3c7f
             title="Get Started"
             color="white"
           />

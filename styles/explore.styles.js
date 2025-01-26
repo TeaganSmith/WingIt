@@ -52,8 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
+  
     shadowRadius: 5,
     elevation: 3,
     marginBottom: 30, // Add extra space below the airline picker
@@ -91,13 +90,13 @@ const styles = StyleSheet.create({
     width: width * 0.9,
   },
   dateInput: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     borderRadius: 30,
     paddingVertical: 15,
     paddingHorizontal: 20,
     width: width * 0.42, // Two inputs side by side
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: '#FFFFFF',
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
@@ -123,28 +122,27 @@ const styles = StyleSheet.create({
     color: '#aaa',
   },
   searchButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#1140FF',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 10,
-    width: width * 0.9, // Match other elements' width
+    width: width * 0.9, 
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
   },
   searchButtonText: {
-    color: '#fff',
+    color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 16,
   },
   input: {
+    color: '#000000',
     height: 20,
-    borderColor: 'gray',
-    paddingLeft: 8,
-    marginBottom: 5,
     borderRadius: 5,
+    
   },
   image: {
     flex: 1, // Ensures the image stretches to fill its container
