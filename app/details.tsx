@@ -1,7 +1,8 @@
 import React from "react"
 import { ScrollView, StyleSheet, SafeAreaView, ImageBackground, View, Image } from "react-native"
-import { ExpandableInfo } from "../components/Trip"
+// import { DetailsList } from "../components/Trip"
 import { SafeAreaProvider } from "react-native-safe-area-context"
+import { DetailsList } from "@/components/DeatilsList"
 // import styles from "@/styles/explore.styles"
 
 export default function ExpandableInfoScreen() {
@@ -19,17 +20,11 @@ export default function ExpandableInfoScreen() {
                     source={require('@/assets/images/LOGO.png')}
                 />
             </View>
-                <ExpandableInfo
-                title="Trip to Bahamas"
+                <DetailsList
+                title="Trip to Texas"
                 content="React Native is an open-source mobile application development framework created by Facebook. It allows developers to use React along with native platform capabilities to build mobile applications for iOS and Android."
-                />
-                <ExpandableInfo
-                title="Trip to Dallas"
-                content="React Native works by using JavaScript to control native components. It provides a bridge that allows JavaScript code to communicate with native modules, enabling developers to write code once and run it on multiple platforms."
-                />
-                <ExpandableInfo
-                title="Trip to Fuji"
-                content="Some advantages of using React Native include: 1) Cross-platform development, 2) Faster development time, 3) Large community and ecosystem, 4) Native performance, 5) Hot reloading for quicker iterations, and 6) Ability to use native modules when needed."
+                content2="React Native works by using JavaScript to control native components. It provides a bridge that allows JavaScript code to communicate with native modules, enabling developers to write code once and run it on multiple platforms."
+                content3="Some advantages of using React Native include: 1) Cross-platform development, 2) Faster development time, 3) Large community and ecosystem, 4) Native performance, 5) Hot reloading for quicker iterations, and 6) Ability to use native modules when needed."
                 />
         </SafeAreaView>          
       </ImageBackground>
