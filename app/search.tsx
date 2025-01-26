@@ -84,6 +84,7 @@ export default function Search() {
                 value={query}
                 onChangeText={(text) => filterAirports(text)}
                 placeholder="Type airport name, city, or code"
+                placeholderTextColor="#000" 
               />
               {filteredAirports.length > 0 && (
                 <FlatList
