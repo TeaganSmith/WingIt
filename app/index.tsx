@@ -32,39 +32,18 @@ export default function HomeScreen() {
         <View style={styles.button}>
 
           <Button
-<<<<<<< HEAD
             onPress={() => router.push('./search')}
-=======
-            onPress={() => router.push('./details')}
->>>>>>> 093bebe7eb9ae7e7e7318433e0e89534bb9f3c7f
             title="Get Started"
             color="white"
           />
         </View>
       </SafeAreaView>
       </ImageBackground>
-
     </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
   logo: {
     height: 120,
     width: 265,
