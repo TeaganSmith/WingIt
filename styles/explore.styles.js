@@ -33,6 +33,41 @@ const styles = StyleSheet.create({
     shadowOpacity: .5,
     shadowRadius: 8,
   },
+  searchButton: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  searchButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  textArea: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    height: 100,
+    marginVertical: 10,
+    textAlignVertical: 'top',
+  },
+  dropdownItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  dropdownItemText: {
+    fontSize: 14,
+    color: '#333',
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+  },
   dropdownItem: {
     padding: 12,
     borderBottomWidth: 1,
@@ -47,23 +82,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   logo: {
-
     width: 200,
-
     height: 200,
-
     resizeMode: 'contain',
-
   },
-
   searchBar: {
-
     margin: 10,
-
     borderRadius: 5,
-
   },
-
 });
 
 export default styles;
