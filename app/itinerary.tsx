@@ -19,7 +19,6 @@ export default function ExpandableInfoScreen() {
                     source={require('@/assets/images/LOGO.png')}
                 />
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
                 <ExpandableInfo
                 title="Trip to Bahamas"
                 content="React Native is an open-source mobile application development framework created by Facebook. It allows developers to use React along with native platform capabilities to build mobile applications for iOS and Android."
@@ -32,11 +31,6 @@ export default function ExpandableInfoScreen() {
                 title="Trip to Fuji"
                 content="Some advantages of using React Native include: 1) Cross-platform development, 2) Faster development time, 3) Large community and ecosystem, 4) Native performance, 5) Hot reloading for quicker iterations, and 6) Ability to use native modules when needed."
                 />
-                <ExpandableInfo
-                title="Is React Native suitable for all types of apps?"
-                content="While React Native is versatile and can be used for many types of apps, it may not be the best choice for apps that require complex animations, heavy computational tasks, or deep integration with native APIs. In such cases, fully native development might be more suitable."
-                />
-            </ScrollView>
         </SafeAreaView>          
       </ImageBackground>
     </SafeAreaProvider>
