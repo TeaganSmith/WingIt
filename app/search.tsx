@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, SafeAreaView, Image, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, SafeAreaView, Image, ImageBackground, TextInput } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { items as airportList } from '../CleanedAirportList';
 import styles from '../styles/explore.styles.js';
@@ -12,14 +12,29 @@ type Airport = typeof airportList[number];
 export default function Search() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAirport, setSelectedAirport] = useState('Select Your Airport');
+  const [searchText, setSearchText] = useState('');
+  const [filteredAirports, setFilteredAirports] = useState(airportList);
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
+    if (!isDropdownVisible) {
+      setSearchText(''); // Reset search text when reopening the dropdown
+      setFilteredAirports(airportList); // Reset the filtered list
+    }
   };
 
   const handleSelectAirport = (airport: Airport) => {
     setSelectedAirport(airport.name);
     setDropdownVisible(false);
+  };
+
+  const handleSearch = (text: string) => {
+    setSearchText(text);
+    const filtered = airportList.filter((airport) =>
+      airport.name.toLowerCase().includes(text.toLowerCase()) || 
+      airport.code.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredAirports(filtered);
   };
 
   return (
@@ -43,8 +58,14 @@ export default function Search() {
 
                 {isDropdownVisible && (
                 <View style={styles.dropdown}>
+                    <TextInput
+                      style={styles.searchInput}
+                      placeholder="Search for an airport"
+                      value={searchText}
+                      onChangeText={handleSearch}
+                    />
                     <FlatList
-                    data={airportList}
+                    data={filteredAirports}
                     keyExtractor={(item) => item.code}
                     renderItem={({ item }) => (
                         <TouchableOpacity
@@ -63,6 +84,5 @@ export default function Search() {
             </ImageBackground>
         </SafeAreaView>
     </SafeAreaProvider>
-
   );
 }

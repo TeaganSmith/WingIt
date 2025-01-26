@@ -47,20 +47,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   logo: {
-
     width: 200,
-
     height: 200,
-
     resizeMode: 'contain',
-
   },
-
   searchBar: {
-
-    margin: 10,
-
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
     borderRadius: 5,
+    padding: 10,
+    marginVertical: 10,
+  },
+  searchInput: {
+    height: 40,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginVertical: 10,
 
   },
 
