@@ -1,37 +1,65 @@
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, SafeAreaView, Image, ImageBackground, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Image,
+  ImageBackground,
+  TextInput,
+  Dimensions,
+  FlatList,
+} from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker'; // Use this for iOS/Android compatibility
+import { DatePickerModal } from 'react-native-paper-dates';
+import airports from '../airports_formatted.js';
+import Autocomplete from 'react-native-autocomplete-input';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { items as airportList } from '../CleanedAirportList';
 import styles from '../styles/explore.styles.js';
-import * as React from 'react';
 
 const image = require('@/assets/images/backgroundimg.png');
 
-type Airport = typeof airportList[number];
-
 export default function Search() {
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [selectedAirport, setSelectedAirport] = useState('Select Your Airport');
-  const [departureDate, setDepartureDate] = useState('');
-  const [arrivalDate, setArrivalDate] = useState('');
-  const [vacationDescription, setVacationDescription] = useState('');
+  const [query, setQuery] = useState(''); // User's search input
+  const [selectedAirport, setSelectedAirport] = useState('Select Your Airport'); // Final selected airport
+  const [filteredAirports, setFilteredAirports] = useState<Airport[]>([]); // Filtered airport suggestions
+  const [departureDate, setDepartureDate] = useState<Date | null>(null); // For departure date
+  const [returnDate, setReturnDate] = useState<Date | null>(null); // For return date
+  const [isDeparturePickerOpen, setDeparturePickerOpen] = useState(false);
+  const [isReturnPickerOpen, setReturnPickerOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!isDropdownVisible);
+  // Function to handle user input and filter the airports
+  interface Airport {
+    name: string;
+    city: string;
+    code: string;
+  }
+
+  const filterAirports = (text: string): void => {
+    setQuery(text);
+    if (text.length > 0) {
+      const filtered = airports.filter(
+        (airport: Airport) =>
+          airport.name.toLowerCase().includes(text.toLowerCase()) ||
+          airport.city.toLowerCase().includes(text.toLowerCase()) ||
+          airport.code.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredAirports(filtered.slice(0, 10)); // Show top 10 matches
+    } else {
+      setFilteredAirports([]); // Clear suggestions if query is empty
+    }
   };
 
-  const handleSelectAirport = (airport: Airport) => {
-    setSelectedAirport(airport.name);
-    setDropdownVisible(false);
-  };
+  interface HandleSelectAirportProps {
+    city: string;
+    code: string;
+    name: string;
+  }
 
-  const handleSearch = () => {
-    console.log({
-      airport: selectedAirport,
-      departureDate,
-      arrivalDate,
-      vacationDescription,
-    });
+  const handleSelectAirport = (airport: HandleSelectAirportProps): void => {
+    setQuery(`${airport.city} (${airport.code})`); // Update input with city and code
+    setSelectedAirport(airport.name); // Save full airport name
+    setFilteredAirports([]); // Hide suggestions
   };
 
   return (
@@ -40,21 +68,26 @@ export default function Search() {
         <ImageBackground
           source={image}
           resizeMode="cover"
-          style={{ flex: 1, width: '100%', height: '100%', justifyContent: 'center' }}
+          style={styles.background}
         >
-          <View style={{ alignItems: 'center', alignContent: 'center', padding: 0, marginTop: 100 }}>
+          {/* Logo */}
+          <View style={styles.logoContainer}>
             <Image style={styles.logo} source={require('@/assets/images/LOGO.png')} />
           </View>
-          <View style={styles.container}>
-            {/* Airport Selector */}
-            <TouchableOpacity style={styles.button} onPress={toggleDropdown}>
-              <Text style={styles.buttonText}>{selectedAirport}</Text>
-            </TouchableOpacity>
 
-            {isDropdownVisible && (
-              <View style={styles.dropdown}>
+          {/* Form */}
+          <View style={styles.container}>
+            {/* Autocomplete Airport Selector */}
+            <View style={styles.autocompleteContainer}>
+              <TextInput
+                style={styles.input}
+                value={query}
+                onChangeText={(text) => filterAirports(text)}
+                placeholder="Type airport name, city, or code"
+              />
+              {filteredAirports.length > 0 && (
                 <FlatList
-                  data={airportList}
+                  data={filteredAirports}
                   keyExtractor={(item) => item.code}
                   renderItem={({ item }) => (
                     <TouchableOpacity
@@ -62,49 +95,69 @@ export default function Search() {
                       onPress={() => handleSelectAirport(item)}
                     >
                       <Text style={styles.dropdownItemText}>
-                        {item.name} ({item.code})
+                        {item.city} ({item.code}) - {item.name}
                       </Text>
                     </TouchableOpacity>
                   )}
                 />
+              )}
+            </View>
+
+            {/* Selected Airport */}
+            <Text style={styles.selectedAirport}>Selected Airport: {selectedAirport}</Text>
+
+            {/* Departure and Return Dates Row */}
+            <View style={styles.row}>
+                {/* Departure Date */}
+                <TouchableOpacity
+                  style={styles.dateInput}
+                  onPress={() => setDeparturePickerOpen(true)}
+                >
+                  <Text style={styles.inputText}>
+                    {departureDate ? departureDate.toDateString() : 'Departure'}
+                  </Text>
+                </TouchableOpacity>
+                <DatePickerModal
+                  locale="en" // Add locale property
+                  mode="single"
+                  visible={isDeparturePickerOpen}
+                  onDismiss={() => setDeparturePickerOpen(false)}
+                  date={departureDate || new Date()}
+                  onConfirm={(date) => {
+                    setDeparturePickerOpen(false);
+                    setDepartureDate(date.date ? new Date(date.date) : null);
+                  }}
+                />
+
+                {/* Return Date */}
+                <TouchableOpacity
+                  style={styles.dateInput}
+                  onPress={() => setReturnPickerOpen(true)}
+                >
+                  <Text style={styles.inputText}>
+                    {returnDate ? returnDate.toDateString() : 'Return'}
+                  </Text>
+                <DatePickerModal
+                  locale="en" // Add locale property
+                  mode="single"
+                  visible={isReturnPickerOpen}
+                  onDismiss={() => setReturnPickerOpen(false)}
+                  date={returnDate || new Date()}
+                  onConfirm={(date) => {
+                    setReturnPickerOpen(false);
+                    setReturnDate(date.date ? new Date(date.date) : null);
+                  }}
+                />
+                </TouchableOpacity>
               </View>
-            )}
 
-            {/* Departure Date */}
-            <TextInput
-              style={styles.input}
-              placeholder="Departure Date (YYYY-MM-DD)"
-              placeholderTextColor="#aaa"
-              value={departureDate}
-              onChangeText={setDepartureDate}
-            />
-
-            {/* Arrival Date */}
-            <TextInput
-              style={styles.input}
-              placeholder="Arrival Date (YYYY-MM-DD)"
-              placeholderTextColor="#aaa"
-              value={arrivalDate}
-              onChangeText={setArrivalDate}
-            />
-
-            {/* Vacation Description */}
-            <TextInput
-              style={styles.textArea}
-              placeholder="Vacation Descriptions..."
-              placeholderTextColor="#aaa"
-              multiline
-              value={vacationDescription}
-              onChangeText={setVacationDescription}
-            />
-
-            {/* Search Button */}
-            <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-              <Text style={styles.searchButtonText}>Search</Text>
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </SafeAreaView>
-    </SafeAreaProvider>
+              {/* Search Button */}
+              <TouchableOpacity style={styles.searchButton}>
+                <Text style={styles.searchButtonText}>Search</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        </SafeAreaView>
+      </SafeAreaProvider>
   );
 }
