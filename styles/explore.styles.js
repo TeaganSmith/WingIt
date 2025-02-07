@@ -31,6 +31,33 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: 'contain',
   },
+  searchButtonText: {
+
+    color: '#fff',
+
+    fontSize: 18,
+
+    fontWeight: 'bold',
+
+  },
+
+  descriptionInput: {
+
+    height: 100,
+
+    borderColor: '#ccc',
+
+    borderWidth: 1,
+
+    borderRadius: 5,
+
+    padding: 10,
+
+    marginVertical: 10,
+
+    textAlignVertical: 'top',
+
+  },
   button: {
     backgroundColor: '#007AFF',
     paddingVertical: 12,

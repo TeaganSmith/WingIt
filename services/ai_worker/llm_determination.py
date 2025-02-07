@@ -2,7 +2,6 @@ import json
 import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
 SYSTEM_PROMPT_EXPERIENCES = """
 You are a travel assistant helping users find the best experiences for their vacation.
 

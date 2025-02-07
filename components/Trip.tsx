@@ -1,49 +1,96 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import type React from "react"
+import { useState } from "react"
+import { View, Text, TouchableOpacity, StyleSheet, LayoutAnimation, Platform, UIManager } from "react-native"
 
-export interface ExpandableInfoProps {
+
+
+type ExpandableInfoProps = {
+
   title: string;
-  content: string;
-  onPress?: () => void;
-}
 
-export const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, content, onPress }) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.contentBox}>
-        <Text style={styles.content}>{content}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  content: string;
+
+  onPress: () => void;
+
 };
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    width: '90%',
-    alignSelf: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginVertical: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  contentBox: {
-    padding: 10,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  content: {
-    fontSize: 14,
-    color: '#555',
-  },
-});
+type FlightSlice = {
+  origin_iata: string;
+  destination_iata: string;
+  departing_at: string;
+  arriving_at: string;
+  slice_duration: string;
+};
+
+type FlightOffer = {
+  offer_id: string;
+  total_price: string;
+  currency: string;
+  slices: FlightSlice[];
+  airline_name: string;
+};
+
+type HotelPrice = {
+  currency: string;
+  total: string;
+  variations: {
+    average: {
+      total: string;
+    };
+    changes: Array<{
+      startDate: string;
+      endDate: string;
+      base: string;
+      total?: string;
+    }>;
+  };
+};
+
+type HotelOffer = {
+  hotel_name: string;
+  hotel_id: string;
+  price: HotelPrice;
+  check_in: string;
+  check_out: string;
+};
+
+type Experience = {
+  name: string;
+  description: string;
+  price: string;
+  currency: string;
+  latitude: number;
+  longitude: number;
+  url: string;
+};
+
+type Destination = {
+  city_name: string;
+  airport_code: string;
+  description: string;
+  attractions: string[];
+  flight_offers: FlightOffer[];
+  hotel_offers: HotelOffer[];
+  matched_experiences: Experience[];
+};
+
+
+export const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, content }) => {
+
+  return (
+    <View style={styles.container}>
+        <TouchableOpacity
+            // onPress={}
+        >
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.content}>
+                {content}
+            </Text>
+        </TouchableOpacity>
+    </View>
+  );
+
+
+
+
 

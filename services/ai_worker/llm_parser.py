@@ -19,17 +19,11 @@ locations, each with the following keys:
 - latitude: the approximate lattitude of the city or airport, for example 25.0343
 - longitude: the approximate longitude of the city or airport, for example -77.3963
 - country_name: the country name, for example "Bahamas"
-- attraction_1: an attraction that matches either the user's message or the location, 
-  for example "Atlantis Resort"
-- attraction_2: a second attraction that matches either the user's message or the location, 
-  for example "Cabbage Beach"
-- attraction_3: a third attraction that matches either the user's message or the location, 
-  for example "Blue Lagoon Island"
+- description: a brief description of the location, for example "A tropical paradise with..."
 
 If the user specifically requests multiple or diverse options (e.g., “a tropical place”), 
 provide up to three interesting, well-known, or relatively distinct locations rather than 
-three airports near each other. If the user specifically asks for one city or there’s only 
-one obvious choice (like "Venice"), return just a dictionary of 3 same answers. 
+three airports near each other. If the user 9one obvious choice (like "Venice"), return just a dictionary of 3 same answers. 
 Return only well-known airports that support American Airlines flights.
 
 Your response MUST be valid JSON in the form:
@@ -42,9 +36,7 @@ Your response MUST be valid JSON in the form:
       "city_code": <CITY_CODE>,
       "latitude": <LATITUDE>,
       "longitude": <LONGITUDE>,
-      "attraction_1": "<ATTRACTION>",
-      "attraction_2": "<ATTRACTION>",
-      "attraction_3": "<ATTRACTION>"
+      "description": "<DESCRIPTION>"
     },
     ...
   ]
