@@ -34,7 +34,7 @@ export default function HomeScreen() {
         <View style={styles.button}>
 
           <Button
-            onPress={() => router.push('./search')}
+            onPress={() => router.push('./itinerary')}
             title="Get Started"
             color="white"
           />

@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: 50, // Push the logo higher
+    marginLeft: 40, 
+    marginTop: 55, // Push the logo higher
   },
   logo: {
     width: 150,
@@ -78,11 +79,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
+  
     shadowRadius: 5,
     elevation: 3,
-    marginBottom: 40, // Add extra space below the airline picker
+    marginBottom: 30, // Add extra space below the airline picker
     width: width * 0.9,
   },
   selectedAirport: {
@@ -117,19 +117,19 @@ const styles = StyleSheet.create({
     width: width * 0.9,
   },
   dateInput: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     borderRadius: 30,
     paddingVertical: 15,
     paddingHorizontal: 20,
     width: width * 0.42, // Two inputs side by side
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: '#FFFFFF',
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
   },
   inputText: {
-    color: '#333',
+    color: '#000000',
     fontSize: 14,
   },
   textArea: {
@@ -149,35 +149,47 @@ const styles = StyleSheet.create({
     color: '#aaa',
   },
   searchButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#1140FF',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 10,
-    width: width * 0.9, // Match other elements' width
+    width: width * 0.9, 
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
   },
   searchButtonText: {
-    color: '#fff',
+    color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 16,
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingLeft: 8,
-    marginBottom: 10,
+    color: '#000000',
+    height: 20,
     borderRadius: 5,
+    
   },
   image: {
     flex: 1, // Ensures the image stretches to fill its container
     width: '100%',
     height: '100%',
   },
+
+  descriptionInput: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 10,
+    width: 350,
+    height: 300,
+    backgroundColor: '#fff',
+    textAlignVertical: 'top',
+    textAlign: 'left',
+  },
+
 });
 
 export default styles;

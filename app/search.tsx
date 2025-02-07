@@ -30,12 +30,21 @@ const SearchScreen: React.FC = () => {
   const [query, setQuery] = useState<string>(""); // User's search input
   const [selectedAirport, setSelectedAirport] = useState<string>(""); // Selected airport code
   const [filteredAirports, setFilteredAirports] = useState<Airport[]>([]); // Filtered airport suggestions
+
   const [departureDate, setDepartureDate] = useState<Date | null>(null); // Departure date
   const [returnDate, setReturnDate] = useState<Date | null>(null); // Return date
   const [isDeparturePickerOpen, setIsDeparturePickerOpen] = useState<boolean>(false); // State for departure picker
   const [isReturnPickerOpen, setIsReturnPickerOpen] = useState<boolean>(false); // State for return picker
   const [userInput, setUserInput] = useState<string>(""); // Additional user input
   const [isLoading, setIsLoading] = useState<boolean>(false); // Loading state
+
+
+  // Function to handle user input and filter the airports
+  interface Airport {
+    name: string;
+    city: string;
+    code: string;
+  }
 
   // Filter airports based on the query
   const filterAirports = (text: string): void => {
@@ -152,6 +161,7 @@ const SearchScreen: React.FC = () => {
                 value={query}
                 onChangeText={(text) => filterAirports(text)}
                 placeholder="Type airport name, city, or code"
+                placeholderTextColor="#000" 
               />
               {filteredAirports.length > 0 && (
                 <FlatList
@@ -171,10 +181,12 @@ const SearchScreen: React.FC = () => {
               )}
             </View>
 
+
             {/* Selected Airport */}
             <Text style={styles.selectedAirport}>
               Selected Airport: {selectedAirport || "None"}
             </Text>
+
 
             {/* Departure and Return Dates */}
             <View style={styles.row}>
@@ -211,6 +223,7 @@ const SearchScreen: React.FC = () => {
                 <Text style={styles.inputText}>
                   {returnDate ? returnDate.toDateString() : "Select Return Date"}
                 </Text>
+
               </TouchableOpacity>
               <DatePickerModal
                 locale="en"
@@ -226,6 +239,7 @@ const SearchScreen: React.FC = () => {
                 }}
               />
             </View>
+
 
             {/* User Input */}
             <TextInput
@@ -333,3 +347,4 @@ const localStyles = StyleSheet.create({
 });
 
 export default SearchScreen;
+

@@ -91,36 +91,6 @@ export const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, content }
   );
 
 
-};
 
-const styles = StyleSheet.create({
-  container: {
-    height: 200,
-    backgroundColor: 'rgba(13, 53, 68, 0.8)',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'white',
-    marginVertical: 8,
-    marginHorizontal: 16,
-    overflow: "hidden",
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-  },
-  title: {
-    fontSize: 17,
-    padding: 10,
-    fontWeight: "bold",
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
-    color: 'white',
-  },
-  content: {
-    fontSize: 14,
-    padding: 10,
-    color: 'white',
-  },
-})
+
 

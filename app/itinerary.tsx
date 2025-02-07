@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, SafeAreaView, ImageBackground, View, Image, ActivityIndicator, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ExpandableInfo } from '../components/Trip';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -8,6 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 type RootStackParamList = {
   Details: { title: string; content: string };
 };
+
 
 type Destination = {
   city_name: string;
@@ -45,6 +48,10 @@ const Itinerary = () => {
 
   
 
+const Itinerary = () => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+
   return (
     <SafeAreaProvider>
       <ImageBackground
@@ -60,28 +67,6 @@ const Itinerary = () => {
               />
             </View>
 
-            {/* Display loading indicator while fetching data */}
-            {isLoading ? (
-              <ActivityIndicator size="large" color="#fff" style={{ marginTop: 20 }} />
-            ) : destinations && destinations.length > 0 ? (
-              destinations.map((dest, index) => (
-                <ExpandableInfo
-                  key={index}
-                  title={`Trip to ${dest.city_name}`}
-                  content={`City Code: ${dest.airport_code}\nDescription: ${dest.description}`}
-                  onPress={() =>
-                    navigation.navigate('Details', {
-                      title: `Trip to ${dest.city_name}`,
-                      content: `City Code: ${dest.airport_code}\nDescription: ${dest.description}`,
-                    })
-                  }
-                />
-              ))
-            ) : (
-              <View style={{ marginTop: 20, alignItems: 'center' }}>
-                <Text style={{ color: '#fff', fontSize: 16 }}>No destinations available</Text>
-              </View>
-            )}
           </ScrollView>
         </SafeAreaView>
       </ImageBackground>
@@ -94,6 +79,7 @@ const styles = StyleSheet.create({
     height: 120,
     width: 265,
     marginBottom: 20,
+
   },
   scrollViewContent: {
     paddingVertical: 20,
