@@ -1,6 +1,5 @@
 import requests
 import json
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from services.ai_worker.llm_parser import parse_destination
 from services.ai_worker.llm_determination import match_experiences_to_description
 
@@ -85,6 +84,7 @@ def fetch_and_process_destination(destination, token, user_input):
 
     activities = limit_experiences(activities)
 
+    print(f"Found {len(activities)} activities for {city_name}.")
     # Use the AI worker to filter the best activities
     filtered_activities = match_experiences_to_description(user_input, activities)
 
@@ -96,7 +96,7 @@ def fetch_and_process_destination(destination, token, user_input):
 def search_and_filter_activities(user_input):
     """
     Search for destinations based on user input, fetch activities for each destination,
-    and filter them using the AI worker in parallel.
+    and filter them using the AI worker sequentially.
     """
     # Parse user input to get destinations
     parsed_destinations = parse_destination(user_input)
@@ -110,17 +110,11 @@ def search_and_filter_activities(user_input):
     # Initialize the result structure
     results = {"user_input": user_input, "destinations": []}
 
-    # Use ThreadPoolExecutor to fetch activities in parallel
-    with ThreadPoolExecutor() as executor:
-        future_to_destination = {
-            executor.submit(fetch_and_process_destination, destination, token, user_input): destination
-            for destination in parsed_destinations.get("destinations", [])
-        }
-
-        for future in as_completed(future_to_destination):
-            result = future.result()
-            if result:
-                results["destinations"].append(result)
+    # Process each destination sequentially
+    for destination in parsed_destinations.get("destinations", []):
+        result = fetch_and_process_destination(destination, token, user_input)
+        if result:
+            results["destinations"].append(result)
 
     return results
 

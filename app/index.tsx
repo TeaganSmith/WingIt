@@ -7,8 +7,10 @@ import { ThemedView } from '@/components/ThemedView';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { router } from 'expo-router';
+import { registerTranslation, en } from 'react-native-paper-dates';
 
 const image = require('@/assets/images/backgroundimg.png'); 
+registerTranslation('en', en);
 
 export default function HomeScreen() {
   return (
